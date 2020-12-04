@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Погодное приложение</string>
+    <string name="choose_city">ВЫБЕРИТЕ ГОРОД ИЗ СПИСКА</string>
+    <string name="name_for_weather_button">Узнать погоду</string>
+    <string name="share">Поделиться с другом</string>
+    <string name="repeat_choose_city">ПОВТОРИТЕ ВЫБОР ГОРОДА</string>
+    <string name="checkbox_pressure">Давление</string>
+    <string name="checkbox_tomorrow">Прогноз на завтра</string>
+    <string name="checkbox_week">Прогноз на неделю</string>
+    <string name="text_holder">Здесь появится прогноз</string>
+
+    <string-array name="cityes_selection">
+        <item>Хабаровск</item>
+        <item>Санкт-Петербург</item>
+        <item>Москва</item>
+    </string-array>
+
+    <string-array name="cityes_weather">
+        <item>Погода в Хабаровске</item>
+        <item>Погода в Санкт-Петербурге</item>
+        <item>Погода в Москве</item>
+    </string-array>
+
+
+</resources>
