@@ -8,6 +8,7 @@
     <string name="checkbox_tomorrow">Прогноз на завтра</string>
     <string name="checkbox_week">Прогноз на неделю</string>
     <string name="text_holder">Здесь появится прогноз</string>
+    <string name="choose_city_for_land">ВЫБЕРИТЕ ГОРОД</string>
 
     <string-array name="cityes_selection">
         <item>Хабаровск</item>

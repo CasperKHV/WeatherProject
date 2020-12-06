@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,18 +23,13 @@ import android.widget.TextView;
 
 public class WeatherResultFragment extends Fragment implements View.OnClickListener {
 
+    private static final String INNER_FRAGMENT_TAG = "inner_fragment_tag";
     private int[] ID = new int[]{R.drawable.sun, R.drawable.cloud, R.drawable.snow};
 
     private TextView weatherText;
-    private TextView pressureText;
-    private TextView tomorrowText;
-    private TextView weekText;
     private Button shareButton;
     private Intent intentShare;
     private String message;
-    private String pressure;
-    private String tomorrow;
-    private String week;
     private int photoWeatherInt;
     private ImageView photoWeather;
     public static final String MESSAGE_TAG = "message tag";
@@ -57,18 +54,12 @@ public class WeatherResultFragment extends Fragment implements View.OnClickListe
         Bundle bundle = getArguments();
         photoWeather = view.findViewById(R.id.photoWeather);
         weatherText = view.findViewById(R.id.textview_weather);
-        pressureText = view.findViewById(R.id.textview_pressure);
-        tomorrowText = view.findViewById(R.id.textview_tomorrow);
-        weekText = view.findViewById(R.id.textview_week);
 
         if (savedInstanceState != null) {
             weatherText.setText(savedInstanceState.getString(BUNDLE_EXTRA_MESSAGE));
         }
         if (bundle != null) {
             message = bundle.getString(MESSAGE_TAG);
-            pressure = bundle.getString(PRESSURE_TAG);
-            tomorrow = bundle.getString(TOMORROW_TAG);
-            week = bundle.getString(WEEK_TAG);
             photoWeatherInt = bundle.getInt(PHOTO_WEATHER_TAG, -1);
         }else throw new RuntimeException("Bundle is empty");
         if (photoWeatherInt != -1) {
@@ -80,17 +71,16 @@ public class WeatherResultFragment extends Fragment implements View.OnClickListe
             intentResult.putExtra(CitiesListFragment.RESULT_OK_STRING, getResources().getString(R.string.repeat_choose_city));
             getActivity().setResult(Activity.RESULT_OK, intentResult);
         }
-        if (pressure != null) {
-            pressureText.setVisibility(View.VISIBLE);
-            pressureText.setText(pressure);
-        }
-        if (tomorrow != null) {
-            tomorrowText.setVisibility(View.VISIBLE);
-            tomorrowText.setText(tomorrow);
-        }
-        if (week != null) {
-            weekText.setVisibility(View.VISIBLE);
-            weekText.setText(week);
+        FragmentManager fragmentManager = getChildFragmentManager();
+        CheckBoxWeatherResultFragment checkBoxWeatherResultFragment = (CheckBoxWeatherResultFragment) fragmentManager.findFragmentByTag(INNER_FRAGMENT_TAG);
+        if(checkBoxWeatherResultFragment==null){
+            if(bundle.getString(PRESSURE_TAG)!=null||bundle.getString(TOMORROW_TAG)!=null||bundle.getString(WEEK_TAG)!=null){
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                checkBoxWeatherResultFragment = CheckBoxWeatherResultFragment.init(bundle);
+                fragmentTransaction.replace(R.id.inner_fragment_container, checkBoxWeatherResultFragment, INNER_FRAGMENT_TAG);//здесь мы благодаря третьему аргументу присваиваем фрагменту тэг
+                // и можем в коде выше проверять по этому тэгу, создан ли фрагмент
+                fragmentTransaction.commit();
+            }
         }
 
 

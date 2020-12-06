@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate savedInstanceState" + savedInstanceState);
         setContentView(R.layout.activity_main);// Связываем макет (layout) с активити
+
     }
 
     @Override

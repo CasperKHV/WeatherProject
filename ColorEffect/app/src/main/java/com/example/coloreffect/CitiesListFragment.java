@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -103,30 +104,37 @@ public class CitiesListFragment extends Fragment  {
     }
 
     private void showActivity(int categoryId) {
-        Intent intent = new Intent(getActivity(),WeatherResult.class);
+
+
         String resultWeather = WeatherSpec.getWeather(getActivity(),categoryId);
         Bundle bundle = new Bundle();
         if(checkBoxPressure.isChecked()){
             String resultPressure = WeatherSpec.getPressure(getActivity(),categoryId);
-//            intent.putExtra(WeatherResultFragment.PRESSURE_TAG,resultPressure);
             bundle.putString(WeatherResultFragment.PRESSURE_TAG,resultPressure);
         }
         if(checkBoxTomorrow.isChecked()){
             String resultTomorrow = WeatherSpec.getTomorrow(getActivity(),categoryId);
-//            intent.putExtra(WeatherResultFragment.TOMORROW_TAG,resultTomorrow);
             bundle.putString(WeatherResultFragment.TOMORROW_TAG,resultTomorrow);
         }
         if(checkBoxWeek.isChecked()){
             String resultWeek = WeatherSpec.getWeek(getActivity(),categoryId);
-//            intent.putExtra(WeatherResultFragment.WEEK_TAG,resultWeek);
             bundle.putString(WeatherResultFragment.WEEK_TAG,resultWeek);
         }
-//        intent.putExtra(WeatherResultFragment.MESSAGE_TAG,resultWeather);
-//        intent.putExtra(WeatherResultFragment.PHOTO_WEATHER_TAG,categoryId);
         bundle.putString(WeatherResultFragment.MESSAGE_TAG,resultWeather);
         bundle.putInt(WeatherResultFragment.PHOTO_WEATHER_TAG,categoryId);
-        intent.putExtra(WeatherResultFragment.BUNDLE,bundle);
-        startActivityForResult(intent, REQUEST_CODE);
+        View fragmentContainer = getActivity().findViewById(R.id.fragment_container_land);
+        if (fragmentContainer != null) {
+            WeatherResultFragment weatherResultFragment = WeatherResultFragment.init(bundle);
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment_container_land, weatherResultFragment);
+            transaction.commit();
+        } else {
+            Intent intent = new Intent(getActivity(),WeatherResult.class);
+            intent.putExtra(WeatherResultFragment.BUNDLE,bundle);
+            startActivityForResult(intent, REQUEST_CODE);
+
+        }
     }
 
     private void initializeViews(View view){
