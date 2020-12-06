@@ -22,7 +22,7 @@ public class WeatherResult extends AppCompatActivity {
         Log.d(TAG,"onCreate savedInstanceState" + savedInstanceState);
         setContentView(R.layout.activity_weather_result);
 
-        WeatherResultFragment resultFragment = new WeatherResultFragment();
+        WeatherResultFragment resultFragment = WeatherResultFragment.init(getIntent().getBundleExtra(WeatherResultFragment.BUNDLE));
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_container,resultFragment);
         transaction.commit();

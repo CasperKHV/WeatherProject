@@ -21,9 +21,8 @@ import android.widget.TextView;
 
 public class WeatherResultFragment extends Fragment implements View.OnClickListener {
 
-    private int [] ID  = new int[]{R.drawable.sun, R.drawable.cloud, R.drawable.snow};
+    private int[] ID = new int[]{R.drawable.sun, R.drawable.cloud, R.drawable.snow};
 
-    private static final String BUNDLE_EXTRAS_MESSAGE = "bundle_extras_message";
     private TextView weatherText;
     private TextView pressureText;
     private TextView tomorrowText;
@@ -41,51 +40,59 @@ public class WeatherResultFragment extends Fragment implements View.OnClickListe
     public static final String TOMORROW_TAG = "tomorrow tag";
     public static final String WEEK_TAG = "week tag";
     public static final String PHOTO_WEATHER_TAG = "photo weather tag";
+    public static final String BUNDLE = "bundle";
+    public static final String BUNDLE_EXTRA_MESSAGE = "bundle extra message";
+
+    public static WeatherResultFragment init(Bundle bundle) {
+        WeatherResultFragment fragment = new WeatherResultFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_weather_result,container,false);
+        View view = inflater.inflate(R.layout.fragment_weather_result, container, false);
 
+        Bundle bundle = getArguments();
         photoWeather = view.findViewById(R.id.photoWeather);
         weatherText = view.findViewById(R.id.textview_weather);
         pressureText = view.findViewById(R.id.textview_pressure);
         tomorrowText = view.findViewById(R.id.textview_tomorrow);
         weekText = view.findViewById(R.id.textview_week);
 
-        if (savedInstanceState != null){
-            weatherText.setText(savedInstanceState.getString(BUNDLE_EXTRAS_MESSAGE));
+        if (savedInstanceState != null) {
+            weatherText.setText(savedInstanceState.getString(BUNDLE_EXTRA_MESSAGE));
         }
-        Intent intent = getActivity().getIntent();
-        if (intent != null) {
-            message = intent.getStringExtra(MESSAGE_TAG);
-            pressure = intent.getStringExtra(PRESSURE_TAG);
-            tomorrow = intent.getStringExtra(TOMORROW_TAG);
-            week = intent.getStringExtra(WEEK_TAG);
-            photoWeatherInt = intent.getIntExtra(PHOTO_WEATHER_TAG,-1);
-            if(photoWeatherInt!=-1){
-                photoWeather.setImageResource(ID[photoWeatherInt]);
-            }
-            if (message != null) {
-                weatherText.setText(message);
-                Intent intentResult = new Intent();
-                intentResult.putExtra(CitiesListFragment.RESULT_OK_STRING, getResources().getString(R.string.repeat_choose_city));
-                getActivity().setResult(Activity.RESULT_OK, intentResult);
-            }
-            if(pressure != null){
-                pressureText.setVisibility(View.VISIBLE);
-                pressureText.setText(pressure);
-            }
-            if(tomorrow != null){
-                tomorrowText.setVisibility(View.VISIBLE);
-                tomorrowText.setText(tomorrow);
-            }
-            if(week != null){
-                weekText.setVisibility(View.VISIBLE);
-                weekText.setText(week);
-            }
+        if (bundle != null) {
+            message = bundle.getString(MESSAGE_TAG);
+            pressure = bundle.getString(PRESSURE_TAG);
+            tomorrow = bundle.getString(TOMORROW_TAG);
+            week = bundle.getString(WEEK_TAG);
+            photoWeatherInt = bundle.getInt(PHOTO_WEATHER_TAG, -1);
+        }else throw new RuntimeException("Bundle is empty");
+        if (photoWeatherInt != -1) {
+            photoWeather.setImageResource(ID[photoWeatherInt]);
+        }
+        if (message != null) {
+            weatherText.setText(message);
+            Intent intentResult = new Intent();
+            intentResult.putExtra(CitiesListFragment.RESULT_OK_STRING, getResources().getString(R.string.repeat_choose_city));
+            getActivity().setResult(Activity.RESULT_OK, intentResult);
+        }
+        if (pressure != null) {
+            pressureText.setVisibility(View.VISIBLE);
+            pressureText.setText(pressure);
+        }
+        if (tomorrow != null) {
+            tomorrowText.setVisibility(View.VISIBLE);
+            tomorrowText.setText(tomorrow);
+        }
+        if (week != null) {
+            weekText.setVisibility(View.VISIBLE);
+            weekText.setText(week);
+        }
 
-        }
 
         shareButton = view.findViewById(R.id.button_share);
         shareButton.setOnClickListener(this);
@@ -110,6 +117,7 @@ public class WeatherResultFragment extends Fragment implements View.OnClickListe
 //        return view;//Возвращаем нашей активити, в которой Фрагмент и создается
     }
 
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button_share) {
@@ -120,13 +128,13 @@ public class WeatherResultFragment extends Fragment implements View.OnClickListe
             }
 //            Intent chooserIntent = Intent.createChooser(intentShare,"Выбор приложения:");
             PackageManager packageManager = getActivity().getPackageManager();
-            if (!packageManager.queryIntentActivities(intentShare,0).isEmpty()) {
+            if (!packageManager.queryIntentActivities(intentShare, 0).isEmpty()) {
 //            if (intentShare.resolveActivity(getPackageManager()) != null) { // мой вариант
                 startActivity(intentShare);
                 shareButton.setBackgroundColor(Color.GREEN);
 
 
-            }else {
+            } else {
                 shareButton.setBackgroundColor(Color.RED);
             }
         }
@@ -134,8 +142,8 @@ public class WeatherResultFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {// Bundle  это посылка, в которую мы кладём данные; onSaveInstanceState вызывается перед onStop
-        if(message != null){
-            outState.putString(BUNDLE_EXTRAS_MESSAGE,message);
+        if (message != null) {
+            outState.putString(BUNDLE_EXTRA_MESSAGE, message);
         }
 
         super.onSaveInstanceState(outState);
