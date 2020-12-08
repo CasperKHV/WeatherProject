@@ -3,7 +3,8 @@ package com.example.coloreffect;
 import android.content.Context;
 
 final class WeatherSpec {// final запрещает наследоваться от класса
-    private WeatherSpec(){//приватный конструктор запрещает создавать экземпляры класса
+
+    private WeatherSpec() {//приватный конструктор запрещает создавать экземпляры класса
     }
 
     static String getWeather(Context context, int position) {

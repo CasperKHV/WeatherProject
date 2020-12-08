@@ -1,8 +1,6 @@
 package com.example.coloreffect;
 
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,23 +12,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
-
-
 public class CheckBoxWeatherResultFragment extends Fragment {
 
-    private TextView pressureText;
-    private TextView tomorrowText;
-    private TextView weekText;
-    private String pressure;
-    private String tomorrow;
-    private String week;
-    public static final String PRESSURE_TAG = "pressure tag";
-    public static final String TOMORROW_TAG = "tomorrow tag";
-    public static final String WEEK_TAG = "week tag";
+    TextView pressureTextView;
+    TextView tomorrowTextView;
+    TextView weekTextView;
+    String pressure;
+    String tomorrow;
+    String week;
 
-    public static CheckBoxWeatherResultFragment init(Bundle bundle) {
+    public static CheckBoxWeatherResultFragment newInstance(String pressure, String tomorrow, String week) {
         CheckBoxWeatherResultFragment fragment = new CheckBoxWeatherResultFragment();
-        fragment.setArguments(bundle);
+        fragment.pressure = pressure;
+        fragment.tomorrow = tomorrow;
+        fragment.week = week;
         return fragment;
     }
 
@@ -38,33 +33,35 @@ public class CheckBoxWeatherResultFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_check_box_weather_result, container, false);
+        pressureTextView = view.findViewById(R.id.textview_pressure);
+        tomorrowTextView = view.findViewById(R.id.textview_tomorrow);
+        weekTextView = view.findViewById(R.id.textview_week);
 
-        Bundle bundle = getArguments();
-        pressureText = view.findViewById(R.id.textview_pressure);
-        tomorrowText = view.findViewById(R.id.textview_tomorrow);
-        weekText = view.findViewById(R.id.textview_week);
-
-        if (bundle != null) {
-            pressure = bundle.getString(PRESSURE_TAG);
-            tomorrow = bundle.getString(TOMORROW_TAG);
-            week = bundle.getString(WEEK_TAG);
-        }else throw new RuntimeException("Bundle is empty");
-        if (pressure != null) {
-            pressureText.setVisibility(View.VISIBLE);
-            pressureText.setText(pressure);
-        }
-        if (tomorrow != null) {
-            tomorrowText.setVisibility(View.VISIBLE);
-            tomorrowText.setText(tomorrow);
-        }
-        if (week != null) {
-            weekText.setVisibility(View.VISIBLE);
-            weekText.setText(week);
-        }
 
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (pressure != null) {
+            pressureTextView.setVisibility(View.VISIBLE);
+            pressureTextView.setText(pressure);
+        }
+
+        if (tomorrow != null) {
+            tomorrowTextView.setVisibility(View.VISIBLE);
+            tomorrowTextView.setText(tomorrow);
+        }
+
+        if (week != null) {
+            weekTextView.setVisibility(View.VISIBLE);
+            weekTextView.setText(week);
+        }
+
+
+    }
 
 
 }

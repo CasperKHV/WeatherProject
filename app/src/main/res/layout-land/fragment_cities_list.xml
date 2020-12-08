@@ -9,14 +9,13 @@
     android:textSize="15sp"
     tools:context=".CitiesListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        style="@style/TextAppearance.AppCompat.Title"
         android:id="@+id/textview_description"
+        style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose_city_for_land"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

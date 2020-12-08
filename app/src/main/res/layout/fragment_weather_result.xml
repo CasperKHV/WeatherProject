@@ -7,34 +7,32 @@
     android:orientation="vertical"
     tools:context=".WeatherResultFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <ImageView
         android:id="@+id/photoWeather"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:paddingVertical="10dp"/>
+        android:paddingVertical="10dp" />
 
     <TextView
-        android:layout_marginTop="@dimen/standard_margin"
         android:id="@+id/textview_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_holder"/>
+        android:layout_marginTop="@dimen/standard_margin"
+        android:text="@string/text_holder" />
 
     <Button
         android:id="@+id/button_share"
-        android:layout_marginLeft="@dimen/standard_padding"
-        android:layout_marginRight="@dimen/standard_padding"
-        android:layout_marginTop="@dimen/standard_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/share"/>
+        android:layout_marginLeft="@dimen/standard_padding"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:layout_marginRight="@dimen/standard_padding"
+        android:text="@string/share" />
 
     <FrameLayout
         android:id="@+id/inner_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

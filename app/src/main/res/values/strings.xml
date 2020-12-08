@@ -1,13 +1,12 @@
 <resources>
-    <string name="app_name">Погодное приложение</string>
-    <string name="choose_city">ВЫБЕРИТЕ ГОРОД ИЗ СПИСКА</string>
-    <string name="name_for_weather_button">Узнать погоду</string>
-    <string name="share">Поделиться с другом</string>
-    <string name="repeat_choose_city">ПОВТОРИТЕ ВЫБОР ГОРОДА</string>
-    <string name="checkbox_pressure">Давление</string>
-    <string name="checkbox_tomorrow">Прогноз на завтра</string>
-    <string name="checkbox_week">Прогноз на неделю</string>
-    <string name="text_holder">Здесь появится прогноз</string>
+    <string name="app_name">Weather application</string>
+    <string name="choose_city">CHOOSE A CITY FROM THE LIST</string>
+    <string name="share">Share with a friend</string>
+    <string name="repeat_choose_city">REPEAT CITY CHOICE</string>
+    <string name="checkbox_pressure">Pressure</string>
+    <string name="checkbox_tomorrow">Forecast for tomorrow</string>
+    <string name="checkbox_week">Forecast for the week</string>
+    <string name="text_holder">The forecast will appear here</string>
 
 
     <string-array name="cityes_selection">
@@ -29,9 +28,9 @@
     </string-array>
 
     <string-array name="tomorrow">
-        <item>Tommorow in Khabarovsk</item>
-        <item>Tommorow in St. Petersburg</item>
-        <item>Tommorow in Moscow</item>
+        <item>Tomorrow in Khabarovsk</item>
+        <item>Tomorrow in St. Petersburg</item>
+        <item>Tomorrow in Moscow</item>
     </string-array>
 
     <string-array name="week">
@@ -39,10 +38,8 @@
         <item>the Week in St. Petersburg</item>
         <item>the Week in Moscow</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="choose_city_for_land">ВЫБЕРИТЕ ГОРОД</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="choose_city_for_land">CHOOSE CITY</string>
 
 
 </resources>

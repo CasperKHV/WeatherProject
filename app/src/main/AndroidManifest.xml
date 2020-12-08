@@ -10,8 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-        <!--android:screenOrientation="portrait"> заблокировать вертикальное положение, запретить переворачивать -->
-            <!--android:configChanges="orientation|screenSize блокирует onCreate при повороте экрана и активити не пересоздаётся"-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +17,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".WeatherResult">
-            <!--android:screenOrientation="portrait">-->
 
         </activity>
     </application>

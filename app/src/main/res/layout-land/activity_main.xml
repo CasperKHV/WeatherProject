@@ -21,26 +21,4 @@
         android:layout_weight="3">
 
     </FrameLayout>
-
-
-
-    <!--<Button
-        android:id="@+id/button_show_weather"
-        android:layout_marginLeft="@dimen/standard_padding"
-        android:layout_marginRight="@dimen/standard_padding"
-        android:layout_marginTop="@dimen/standard_margin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/name_for_weather_button"/>-->
-
-
 </LinearLayout>
-<!--xmlns:android="http://schemas.android.com/apk/res/android" всегда надо указывать, грубо говоря, это ссылка на namespace, на папку res, но это очень условное объяснение!
-android:layout_width="match_parent"
-    android:layout_height="match_parent" ширина и высота должны быть у каждого вью и вьюгрупп (match_parent - по ширине или высоте экрана
-    wrap_content - облеплять, обтягивать, то есть занимает столько места, сколько занимает контент)
-     LinearLayout называют viewgroup или контейнером, в LinearLayout все вью идут друг за другом
-     android:orientation="vertical" если не указать, то по умолчанию ориентация горизонтальная
-     android:id= благодаря id мы в джава коде в активити можем его найти через класс R, если вью не прописать id, то в джава коде обратиться к нему не сможем
-     комбобокс или спиннер - выпадающий список
-     android:layout_marginTop="15dp" отступ -->
