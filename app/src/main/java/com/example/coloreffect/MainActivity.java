@@ -1,14 +1,21 @@
 package com.example.coloreffect;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.ActionMenuItem;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements CitiesListFragment.CitiesListListener {
 
@@ -20,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements CitiesListFragmen
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate savedInstanceState" + savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
     }
 
@@ -75,8 +83,29 @@ public class MainActivity extends AppCompatActivity implements CitiesListFragmen
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CitiesListFragment.REQUEST_CODE && data != null) {
-            descriptionText.setText(data.getStringExtra(CitiesListFragment.RESULT_OK_STRING));
+        if (descriptionText != null) {
+            if (requestCode == CitiesListFragment.REQUEST_CODE && data != null) {
+                descriptionText.setText(data.getStringExtra(CitiesListFragment.RESULT_OK_STRING));
+
+            }
         }
+
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Toast toast = Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast.show();
+        return true;
+    }
+
+
 }

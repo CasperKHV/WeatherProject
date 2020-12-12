@@ -3,8 +3,11 @@ package com.example.coloreffect;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -47,8 +50,8 @@ public class CitiesListFragment extends Fragment {
     public void onAttach(Context context) {
         try {
             citiesListListener = (CitiesListListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement onSomeEventListener");
+        } catch (ClassCastException | NullPointerException e) {
+            throw new IllegalArgumentException(context.toString() + " must implement CitiesListListener");
         }
         super.onAttach(context);
     }

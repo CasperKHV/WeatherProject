@@ -5,8 +5,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.Log;
-
-import java.io.Serializable;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 public class WeatherResult extends AppCompatActivity {
 
@@ -56,5 +59,21 @@ public class WeatherResult extends AppCompatActivity {
         super.onDestroy();
     }
 
+
+    public void showPopup(View view){
+        PopupMenu popup = new PopupMenu(this,view);
+        popup.inflate(R.menu.my_menu);
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast toast = Toast.makeText(WeatherResult.this, item.toString(), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 0);
+                toast.show();
+                return true;
+            }
+        });
+        popup.show();
+    }
 
 }

@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".WeatherResultFragment">
 
+
     <ImageView
         android:id="@+id/photoWeather"
         android:layout_width="100dp"
