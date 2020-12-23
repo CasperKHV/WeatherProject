@@ -21,7 +21,6 @@ public class WeatherResult extends AppCompatActivity {
         Log.d(TAG, "onCreate savedInstanceState" + savedInstanceState);
         setContentView(R.layout.activity_weather_result);
 
-
         WeatherResultFragment resultFragment = WeatherResultFragment.newInstance(getIntent().getSerializableExtra(WeatherResultFragment.DATA_FOR_BUNDLE));
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, resultFragment);
@@ -60,8 +59,8 @@ public class WeatherResult extends AppCompatActivity {
     }
 
 
-    public void showPopup(View view){
-        PopupMenu popup = new PopupMenu(this,view);
+    public void showPopup(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
         popup.inflate(R.menu.my_menu);
 
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

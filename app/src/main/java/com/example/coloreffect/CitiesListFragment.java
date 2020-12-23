@@ -1,13 +1,9 @@
 package com.example.coloreffect;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -17,12 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 public class CitiesListFragment extends Fragment {
+
 
     private static final String SAVED_CITY = "savedCity";
     private SharedPreferences savedCity;
@@ -66,6 +62,7 @@ public class CitiesListFragment extends Fragment {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         cityesCategoriesRecyclerView.setLayoutManager(layoutManager);
         cityesCategoriesRecyclerView.setAdapter(new MyAdapter());
+
 
         initializeViews(rootView);
 
@@ -145,6 +142,7 @@ public class CitiesListFragment extends Fragment {
             resultWeek = WeatherSpec.getWeek(getActivity(), categoryId);
         }
 
+
         DataForBundle dataForBundle = new DataForBundle(resultPressure, resultTomorrow, resultWeek, resultWeather, categoryId);
         citiesListListener.onListItemClick(categoryId, dataForBundle, descriptionText);
     }
@@ -154,6 +152,8 @@ public class CitiesListFragment extends Fragment {
         checkBoxPressure = view.findViewById(R.id.checkbox_pressure);
         checkBoxTomorrow = view.findViewById(R.id.checkbox_tomorrow);
         checkBoxWeek = view.findViewById(R.id.checkbox_week);
+
+
     }
 
 
@@ -168,8 +168,6 @@ public class CitiesListFragment extends Fragment {
         savedCity.edit().putBoolean(CHECK_BOX_WEEK, checkBoxWeek.isChecked()).apply();
         super.onSaveInstanceState(outState);
     }
-
-
 
 
 }

@@ -8,6 +8,10 @@
     <string name="checkbox_week">Forecast for the week</string>
     <string name="text_holder">The forecast will appear here</string>
 
+    <string name="nav_header_title">Wheater</string>
+    <string name="nav_header_subtitle">Email</string>
+    <string name="nav_header_desc">Navigation header</string>
+
 
     <string-array name="cityes_selection">
         <item>Khabarovsk</item>
@@ -47,6 +51,9 @@
     <string name="context_menu_hide">hide image</string>
     <string name="context_menu_show_background">show background</string>
     <string name="context_menu_delete_background">delete background</string>
+    <string name="main_fragment">Main application</string>
+    <string name="hello_blank_fragment">Fragment for NVtest</string>
+    <string name="fragment_for_n_v">FragmentForNV</string>
 
 
 </resources>
