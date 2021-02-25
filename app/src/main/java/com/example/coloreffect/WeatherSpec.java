@@ -7,30 +7,27 @@ final class WeatherSpec {
     private WeatherSpec() {
     }
 
-    static String getWeather(Context context, int position) {
-        String[] weather = context.getResources().getStringArray(R.array.cityes_weather);
-        return weather[position];
+    static String getWeather(Context context, int position, ModelForGSONWeatherClass weather) {
+        String[] city = context.getResources().getStringArray(R.array.cityes_weather);
+        return city[position] + weather.main.temp + context.getString(R.string.celsius) + "\n" + context.getString(R.string.for_wind_beggining) + weather.wind.getSpeed() + context.getString(R.string.for_wind) + "\n" + weather.weather[0].getDescription();
 
 
     }
 
-    static String getPressure(Context context, int position) {
-        String[] pressure = context.getResources().getStringArray(R.array.pressure);
-        return pressure[position];
+    static String getPressure(Context context, ModelForGSONWeatherClass weather) {
+        return String.valueOf(Math.round(weather.main.getPressure() / 1.333333333333)) + context.getString(R.string.mm_hg);
 
 
     }
 
-    static String getTomorrow(Context context, int position) {
-        String[] tomorrow = context.getResources().getStringArray(R.array.tomorrow);
-        return tomorrow[position];
+    static String getFeels(Context context, ModelForGSONWeatherClass weather) {
+        return context.getString(R.string.for_feels_beggining) + String.valueOf(weather.main.getFeels_like()) + context.getString(R.string.celsius);
 
 
     }
 
-    static String getWeek(Context context, int position) {
-        String[] week = context.getResources().getStringArray(R.array.week);
-        return week[position];
+    static String getHumidity(Context context, ModelForGSONWeatherClass weather) {
+        return context.getString(R.string.humidity) + String.valueOf(weather.main.getHumidity()) + context.getString(R.string.percent);
 
 
     }

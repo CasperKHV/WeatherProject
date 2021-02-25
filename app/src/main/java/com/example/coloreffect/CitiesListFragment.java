@@ -25,12 +25,12 @@ public class CitiesListFragment extends Fragment {
     public static final String RESULT_OK_STRING = "Ok";
 
     private CheckBox checkBoxPressure;
-    private CheckBox checkBoxTomorrow;
-    private CheckBox checkBoxWeek;
+    private CheckBox checkBoxFeels;
+    private CheckBox checkBoxHumidity;
 
     private static final String CHECK_BOX_PRESSURE = "checkBoxPressure";
-    private static final String CHECK_BOX_TOMORROW = "checkBoxTomorrow";
-    private static final String CHECK_BOX_WEEK = "checkBoxWeek";
+    private static final String CHECK_BOX_FEELS = "checkBoxFeels";
+    private static final String CHECK_BOX_HUMIDITY = "checkBoxWeek";
 
     public static final int REQUEST_CODE = 100;
     private TextView descriptionText;
@@ -75,8 +75,8 @@ public class CitiesListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initializePreferences();
         checkBoxPressure.setChecked(savedCity.getBoolean(CHECK_BOX_PRESSURE, false));
-        checkBoxTomorrow.setChecked(savedCity.getBoolean(CHECK_BOX_TOMORROW, false));
-        checkBoxWeek.setChecked(savedCity.getBoolean(CHECK_BOX_WEEK, false));
+        checkBoxFeels.setChecked(savedCity.getBoolean(CHECK_BOX_FEELS, false));
+        checkBoxHumidity.setChecked(savedCity.getBoolean(CHECK_BOX_HUMIDITY, false));
     }
 
     private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -104,7 +104,6 @@ public class CitiesListFragment extends Fragment {
         }
     }
 
-    //Адаптер для RecyclerView
     private class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         @Override
@@ -125,33 +124,44 @@ public class CitiesListFragment extends Fragment {
     }
 
     private void showActivity(int categoryId) {
-        String resultPressure = null;
-        String resultTomorrow = null;
-        String resultWeek = null;
+        new Thread() {
+            public void run() {
+                Controller controller = new Controller();
+                String resultPressure = null;
+                String resultFeels = null;
+                String resultHumidity = null;
+                String iconCode = null;
+                String[] cityNamesForAPI = getResources().getStringArray(R.array.city_names);
+                ModelForGSONWeatherClass weather = controller.start(getActivity(), cityNamesForAPI[categoryId]);
 
-        String resultWeather = WeatherSpec.getWeather(getActivity(), categoryId);
-        if (checkBoxPressure.isChecked()) {
-            resultPressure = WeatherSpec.getPressure(getActivity(), categoryId);
-        }
+                String resultWeather = WeatherSpec.getWeather(getActivity(), categoryId, weather);
+                if (checkBoxPressure.isChecked()) {
 
-        if (checkBoxTomorrow.isChecked()) {
-            resultTomorrow = WeatherSpec.getTomorrow(getActivity(), categoryId);
-        }
+                    if (weather != null) {
+                        resultPressure = WeatherSpec.getPressure(getActivity(), weather);
+                    }
+                }
 
-        if (checkBoxWeek.isChecked()) {
-            resultWeek = WeatherSpec.getWeek(getActivity(), categoryId);
-        }
+                if (checkBoxFeels.isChecked()) {
+                    resultFeels = WeatherSpec.getFeels(getActivity(), weather);
+                }
 
+                if (checkBoxHumidity.isChecked()) {
+                    resultHumidity = WeatherSpec.getHumidity(getActivity(), weather);
+                }
 
-        DataForBundle dataForBundle = new DataForBundle(resultPressure, resultTomorrow, resultWeek, resultWeather, categoryId);
-        citiesListListener.onListItemClick(categoryId, dataForBundle, descriptionText);
+                iconCode = weather.weather[0].getIcon();
+                DataForBundle dataForBundle = new DataForBundle(resultPressure, resultFeels, resultHumidity, resultWeather, iconCode, categoryId);
+                citiesListListener.onListItemClick(categoryId, dataForBundle, descriptionText);
+            }
+        }.start();
     }
 
     private void initializeViews(View view) {
         descriptionText = view.findViewById(R.id.textview_description);
         checkBoxPressure = view.findViewById(R.id.checkbox_pressure);
-        checkBoxTomorrow = view.findViewById(R.id.checkbox_tomorrow);
-        checkBoxWeek = view.findViewById(R.id.checkbox_week);
+        checkBoxFeels = view.findViewById(R.id.checkbox_feels);
+        checkBoxHumidity = view.findViewById(R.id.checkbox_humidity);
 
 
     }
@@ -164,8 +174,8 @@ public class CitiesListFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         savedCity.edit().putBoolean(CHECK_BOX_PRESSURE, checkBoxPressure.isChecked()).apply();
-        savedCity.edit().putBoolean(CHECK_BOX_TOMORROW, checkBoxTomorrow.isChecked()).apply();
-        savedCity.edit().putBoolean(CHECK_BOX_WEEK, checkBoxWeek.isChecked()).apply();
+        savedCity.edit().putBoolean(CHECK_BOX_FEELS, checkBoxFeels.isChecked()).apply();
+        savedCity.edit().putBoolean(CHECK_BOX_HUMIDITY, checkBoxHumidity.isChecked()).apply();
         super.onSaveInstanceState(outState);
     }
 

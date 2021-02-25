@@ -4,18 +4,18 @@
 
     <item
         android:id="@+id/menu_button_1"
-        android:title="@string/first_button"
         android:icon="@android:drawable/ic_menu_add"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/first_button"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_button_2"
         android:title="@string/second_button"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_button_3"
         android:title="@string/third_button"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
 </menu>

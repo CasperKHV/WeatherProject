@@ -7,16 +7,18 @@ public class DataForBundle implements Serializable {
     private static final long serialVersionUID = 1L;
 
     String resultPressure;
-    String resultTomorrow;
-    String resultWeek;
+    String resultFeels;
+    String resultHumidity;
     String message;
+    String iconCode;
     int photoWeather;
 
-    public DataForBundle(String resultPressure, String resultTomorrow, String resultWeek, String message, int photoWeather) {
+    public DataForBundle(String resultPressure, String resultFeels, String resultHumidity, String message, String iconCode, int photoWeather) {
         this.resultPressure = resultPressure;
-        this.resultTomorrow = resultTomorrow;
-        this.resultWeek = resultWeek;
+        this.resultFeels = resultFeels;
+        this.resultHumidity = resultHumidity;
         this.message = message;
+        this.iconCode = iconCode;
         this.photoWeather = photoWeather;
     }
 
@@ -28,20 +30,20 @@ public class DataForBundle implements Serializable {
         this.resultPressure = resultPressure;
     }
 
-    public String getResultTomorrow() {
-        return resultTomorrow;
+    public String getResultFeels() {
+        return resultFeels;
     }
 
-    public void setResultTomorrow(String resultTomorrow) {
-        this.resultTomorrow = resultTomorrow;
+    public void setResultFeels(String resultFeels) {
+        this.resultFeels = resultFeels;
     }
 
-    public String getResultWeek() {
-        return resultWeek;
+    public String getResultHumidity() {
+        return resultHumidity;
     }
 
-    public void setResultWeek(String resultWeek) {
-        this.resultWeek = resultWeek;
+    public void setResultHumidity(String resultHumidity) {
+        this.resultHumidity = resultHumidity;
     }
 
     public String getMessage() {
@@ -58,5 +60,13 @@ public class DataForBundle implements Serializable {
 
     public void setPhotoWeather(int photoWeather) {
         this.photoWeather = photoWeather;
+    }
+
+    public String getIconCode() {
+        return iconCode;
+    }
+
+    public void setIconCode(String iconCode) {
+        this.iconCode = iconCode;
     }
 }

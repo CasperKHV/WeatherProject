@@ -15,17 +15,17 @@ import androidx.fragment.app.Fragment;
 public class CheckBoxWeatherResultFragment extends Fragment {
 
     TextView pressureTextView;
-    TextView tomorrowTextView;
-    TextView weekTextView;
+    TextView feelsTextView;
+    TextView humidityTextView;
     String pressure;
-    String tomorrow;
-    String week;
+    String feels;
+    String humidity;
 
-    public static CheckBoxWeatherResultFragment newInstance(String pressure, String tomorrow, String week) {
+    public static CheckBoxWeatherResultFragment newInstance(String pressure, String feels, String humidity) {
         CheckBoxWeatherResultFragment fragment = new CheckBoxWeatherResultFragment();
         fragment.pressure = pressure;
-        fragment.tomorrow = tomorrow;
-        fragment.week = week;
+        fragment.feels = feels;
+        fragment.humidity = humidity;
         return fragment;
     }
 
@@ -34,9 +34,8 @@ public class CheckBoxWeatherResultFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_check_box_weather_result, container, false);
         pressureTextView = view.findViewById(R.id.textview_pressure);
-        tomorrowTextView = view.findViewById(R.id.textview_tomorrow);
-        weekTextView = view.findViewById(R.id.textview_week);
-
+        feelsTextView = view.findViewById(R.id.textview_feels);
+        humidityTextView = view.findViewById(R.id.textview_humidity);
 
         return view;
     }
@@ -50,14 +49,14 @@ public class CheckBoxWeatherResultFragment extends Fragment {
             pressureTextView.setText(pressure);
         }
 
-        if (tomorrow != null) {
-            tomorrowTextView.setVisibility(View.VISIBLE);
-            tomorrowTextView.setText(tomorrow);
+        if (feels != null) {
+            feelsTextView.setVisibility(View.VISIBLE);
+            feelsTextView.setText(feels);
         }
 
-        if (week != null) {
-            weekTextView.setVisibility(View.VISIBLE);
-            weekTextView.setText(week);
+        if (humidity != null) {
+            humidityTextView.setVisibility(View.VISIBLE);
+            humidityTextView.setText(humidity);
         }
 
 

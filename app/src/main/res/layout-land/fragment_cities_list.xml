@@ -32,6 +32,11 @@
             android:layout_margin="8dp"
             android:layout_marginBottom="8dp" />
 
+        <CheckBox
+            android:id="@+id/checkbox_feels"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/checkbox_feels" />
 
         <CheckBox
             android:id="@+id/checkbox_pressure"
@@ -40,16 +45,10 @@
             android:text="@string/checkbox_pressure" />
 
         <CheckBox
-            android:id="@+id/checkbox_tomorrow"
+            android:id="@+id/checkbox_humidity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/checkbox_tomorrow" />
-
-        <CheckBox
-            android:id="@+id/checkbox_week"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/checkbox_week" />
+            android:text="@string/checkbox_humidity" />
 
     </LinearLayout>
 

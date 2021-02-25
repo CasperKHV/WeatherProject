@@ -3,6 +3,7 @@ package com.example.coloreffect;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -27,7 +28,6 @@ import java.io.Serializable;
 public class WeatherResultFragment extends Fragment implements View.OnClickListener {
 
     private static final String INNER_FRAGMENT_TAG = "inner_fragment_tag";
-    private int[] ID = new int[]{R.drawable.sun, R.drawable.cloud, R.drawable.snow};
 
     private DataForBundle dataForBundle;
     private TextView weatherText;
@@ -61,18 +61,84 @@ public class WeatherResultFragment extends Fragment implements View.OnClickListe
             dataForBundle = (DataForBundle) savedInstanceState.getSerializable(DATA_FOR_BUNDLE);
         }
 
-        int photoWeatherInt;
+        String photoWeatherCode;
         if (dataForBundle != null) {
             message = dataForBundle.getMessage();
-            photoWeatherInt = dataForBundle.getPhotoWeather();
+            photoWeatherCode = dataForBundle.getIconCode();
         } else {
             throw new RuntimeException("DataForBundle is empty");
         }
 
-        if (photoWeatherInt != -1) {
-            photoWeather.setImageResource(ID[photoWeatherInt]);
+        if (photoWeatherCode != null) {
+            int imageId = R.drawable.troll_weather;
+            switch (photoWeatherCode) {
+                case "01d":
+                    imageId = R.drawable.a01d;
+                    break;
+                case "01n":
+                    imageId = R.drawable.a01n;
+                    break;
+                case "02d":
+                    imageId = R.drawable.a02d;
+                    break;
+                case "02n":
+                    imageId = R.drawable.a02n;
+                    break;
+                case "03d":
+                    imageId = R.drawable.a03d;
+                    break;
+                case "03n":
+                    imageId = R.drawable.a03n;
+                    break;
+                case "04d":
+                    imageId = R.drawable.a04d;
+                    break;
+                case "04n":
+                    imageId = R.drawable.a04n;
+                    break;
+                case "09d":
+                    imageId = R.drawable.a09d;
+                    break;
+                case "09n":
+                    imageId = R.drawable.a09n;
+                    break;
+                case "10d":
+                    imageId = R.drawable.a10d;
+                    break;
+                case "10n":
+                    imageId = R.drawable.a10n;
+                    break;
+                case "11d":
+                    imageId = R.drawable.a11d;
+                    break;
+                case "11n":
+                    imageId = R.drawable.a11n;
+                    break;
+                case "13d":
+                    imageId = R.drawable.a13d;
+                    break;
+                case "13n":
+                    imageId = R.drawable.a13n;
+                    break;
+                case "50d":
+                    imageId = R.drawable.a50d;
+                    break;
+                case "50n":
+                    imageId = R.drawable.a50n;
+                    break;
+                default:
+                    break;
+
+            }
+            try {
+                photoWeather.setImageResource(imageId);
+            } catch (Resources.NotFoundException e) {
+                e.printStackTrace();
+                photoWeather.setImageResource(R.drawable.troll_weather);
+            }
             registerForContextMenu(photoWeather);
         }
+
 
         if (message != null) {
             weatherText.setText(message);
@@ -85,11 +151,11 @@ public class WeatherResultFragment extends Fragment implements View.OnClickListe
         CheckBoxWeatherResultFragment checkBoxWeatherResultFragment = (CheckBoxWeatherResultFragment) fragmentManager.findFragmentByTag(INNER_FRAGMENT_TAG);
         if (checkBoxWeatherResultFragment == null) {
             String pressure = dataForBundle.getResultPressure();
-            String tomorrow = dataForBundle.getResultTomorrow();
-            String week = dataForBundle.getResultWeek();
-            if (pressure != null || tomorrow != null || week != null) {
+            String feels = dataForBundle.getResultFeels();
+            String humidity = dataForBundle.getResultHumidity();
+            if (pressure != null || feels != null || humidity != null) {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                checkBoxWeatherResultFragment = CheckBoxWeatherResultFragment.newInstance(pressure, tomorrow, week);
+                checkBoxWeatherResultFragment = CheckBoxWeatherResultFragment.newInstance(pressure, feels, humidity);
                 fragmentTransaction.replace(R.id.inner_fragment_container, checkBoxWeatherResultFragment, INNER_FRAGMENT_TAG);
                 fragmentTransaction.commit();
             }
